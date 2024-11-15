@@ -112,10 +112,8 @@ def evaluate():
         ans = eval(ans)
         disp.delete(0, END)
         disp.insert(0, ans)
-    except Exception:
-        # disp.delete(0, END)
-        # disp.insert(0, '0')
-        tkinter.messagebox.showerror("Value Error!")
+    except Exception as e:
+        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
 def modulo():
     pos = len(disp.get())
@@ -139,10 +137,8 @@ def log():
         ans = math.log10(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
-    except Exception:
-        disp.delete(0, END)
-        disp.insert(0, '0')
-        tkinter.messagebox.showerror("Value Error!")
+    except Exception as e:
+        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
 def ln():
     try:
@@ -150,20 +146,16 @@ def ln():
         ans = math.log(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
-    except Exception:
-        disp.delete(0, END)
-        disp.insert(0, '0')
-        tkinter.messagebox.showerror("Value Error!")
+    except Exception as e :
+        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 def round():
     try:
         ans = float(disp.get())
         ans = round(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
-    except Exception:
-        disp.delete(0, END)
-        disp.insert(0, '0')
-        tkinter.messagebox.showerror("Value Error!")
+    except Exception as e:
+        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
 def sqr_root():
     try:
@@ -171,10 +163,8 @@ def sqr_root():
         ans = math.sqrt(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
-    except Exception:
-        disp.delete(0, END)
-        disp.insert(0, '0')
-        tkinter.messagebox.showerror("Value Error!")
+    except Exception as e:
+        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
 def fact():
     try:
@@ -182,10 +172,8 @@ def fact():
         ans = math.factorial(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
-    except Exception:
-        disp.delete(0, END)
-        disp.insert(0, '0')
-        tkinter.messagebox.showerror("Value Error!")
+    except Exception as e:
+        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
 def delete():
     pos = len(disp.get())
