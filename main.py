@@ -9,12 +9,9 @@ root.title("Scientific Calculator")
 disp = Entry(root, font="Verdana 20", fg="Black", bg="mistyrose", bd=4, justify=RIGHT)
 disp.pack(expand=True, fill=BOTH)
 
-# Frames for buttons
+# Frame for buttons
 row1 = Frame(root, bg="#000000")
 row1.pack(expand=True, fill=BOTH)
-
-row2 = Frame(root, bg="#000000")
-row2.pack(expand=True, fill=BOTH)
 
 # Row 1 Buttons
 pibtn = Button(row1, text="π", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
@@ -45,6 +42,9 @@ plusBtn = Button(row1, text="+", font="segoe18", relief=GROOVE, fg="white", bg="
 plusBtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 # Row 2 Buttons
+row2 = Frame(root, bg="#000000")
+row2.pack(expand=True, fill=BOTH)
+
 e_btn = Button(row2, text="e", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
 e_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
@@ -69,7 +69,72 @@ btn5.pack(side=LEFT, expand=True, fill=BOTH)
 btn6 = Button(row2, text="6", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
 btn6.pack(side=LEFT, expand=True, fill=BOTH)
 
-plusBtn2 = Button(row2, text="+", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
-plusBtn2.pack(side=LEFT, expand=True, fill=BOTH)
+minusBtn = Button(row2, text="-", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+minusBtn.pack(side=LEFT, expand=True, fill=BOTH)
+
+
+# row 3 buttons
+row3 = Frame(root, bg="#000000")
+row3.pack(expand=True, fill=BOTH)
+
+conv_btn = Button(row3, text="Rad", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+conv_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+round_btn = Button(row3, text="round", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+round_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+ln_btn = Button(row3, text="ln", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+ln_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+log_btn = Button(row3, text="log", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+log_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+powerbtn = Button(row3, text="x^y", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+powerbtn.pack(side=LEFT, expand=True, fill=BOTH)
+
+btn7 = Button(row3, text="7", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+btn7.pack(side=LEFT, expand=True, fill=BOTH)
+
+btn8 = Button(row3, text="8", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+btn8.pack(side=LEFT, expand=True, fill=BOTH)
+
+btn9 = Button(row3, text="9", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+btn9.pack(side=LEFT, expand=True, fill=BOTH)
+
+mulBtn2 = Button(row3, text="x", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+mulBtn2.pack(side=LEFT, expand=True, fill=BOTH)
+
+
+
+# row 4 buttons
+row4 = Frame(root, bg="#000000")
+row4.pack(expand=True, fill=BOTH)
+
+mod_btn = Button(row4, text="%", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+mod_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+openbkt_btn = Button(row4, text="(", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+openbkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+closebkt_btn = Button(row4, text=")", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+closebkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+dot_btn = Button(row4, text=".", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+dot_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+clearbtn = Button(row4, text="C", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+clearbtn.pack(side=LEFT, expand=True, fill=BOTH)
+
+del_btn = Button(row4, text="⌫", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+del_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+btn0 = Button(row4, text="0", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+btn0.pack(side=LEFT, expand=True, fill=BOTH)
+
+equal_btn = Button(row4, text="=", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+equal_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+divide_btn = Button(row4, text="÷", font="segoe18", relief=GROOVE, fg="white", bg="#333333")
+divide_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 root.mainloop()
