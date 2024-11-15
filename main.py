@@ -176,7 +176,7 @@ def atan():
 # power btn
 def pow():
     pos = len(disp.get())
-    disp.insert(pos, "^")
+    disp.insert(pos, "**")
 
 def dot():
     pos = len(disp.get())
@@ -189,6 +189,7 @@ def insertOpenBkt():
 def insertCloseBkt():
     pos = len(disp.get())
     disp.insert(pos, ")")
+
 def evaluate():
     try:
         ans = disp.get()
@@ -220,6 +221,72 @@ def exp():
     pos = len(disp.get())
     disp.insert(pos, str(math.e))
 
+def log():
+    try:
+        ans = float(disp.get())
+        ans = math.log10(ans)
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+    except Exception:
+        disp.delete(0, END)
+        disp.insert(0, '0')
+        tkinter.messagebox.showerror("Value Error!")
+
+def ln():
+    try:
+        ans = float(disp.get())
+        ans = math.log(ans)
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+    except Exception:
+        disp.delete(0, END)
+        disp.insert(0, '0')
+        tkinter.messagebox.showerror("Value Error!")
+def round():
+    try:
+        ans = float(disp.get())
+        ans = round(ans)
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+    except Exception:
+        disp.delete(0, END)
+        disp.insert(0, '0')
+        tkinter.messagebox.showerror("Value Error!")
+
+def sqr_root():
+    try:
+        ans = float(disp.get())
+        ans = math.sqrt(ans)
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+    except Exception:
+        disp.delete(0, END)
+        disp.insert(0, '0')
+        tkinter.messagebox.showerror("Value Error!")
+
+def fact():
+    try:
+        ans = disp.get()
+        ans = math.factorial(ans)
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+    except Exception:
+        disp.delete(0, END)
+        disp.insert(0, '0')
+        tkinter.messagebox.showerror("Value Error!")
+
+def delete():
+    pos = len(disp.get())
+    display = str(disp.get())
+    if display == '' or display == ' ':
+        disp.insert(0, '0')
+    elif display == '0':
+        pass
+    else :
+        disp.delete(0, END)
+        disp.insert(0, display[0 : pos - 1])
+
+
 # Entry screen widget (for output)
 disp = Entry(root, font="Verdana 20", fg="Black", bg="mistyrose", bd=4, justify=RIGHT)
 disp.insert(0, '0')
@@ -230,12 +297,12 @@ row1 = Frame(root, bg="#000000")
 row1.pack(expand=True, fill=BOTH)
 
 # Row 1 Buttons
-pibtn = Button(row1, text="π", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+pibtn = Button(row1, text="π", font="segoe18", relief=GROOVE, bd = 0, command=pi, fg="white", bg="#333333")
 pibtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-factbtn = Button(row1, text="x!", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+factbtn = Button(row1, text="x!", font="segoe18", relief=GROOVE, bd = 0, command = fact, fg="white", bg="#333333")
 factbtn.pack(side=LEFT, expand=True, fill=BOTH)
-
+ 
 sinbtn = Button(row1, text="sin", font="segoe18", relief=GROOVE, bd = 0, command = sin, fg="white", bg="#333333")
 sinbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
@@ -261,10 +328,10 @@ plusBtn.pack(side=LEFT, expand=True, fill=BOTH)
 row2 = Frame(root, bg="#000000")
 row2.pack(expand=True, fill=BOTH)
 
-e_btn = Button(row2, text="e", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+e_btn = Button(row2, text="e", font="segoe18", relief=GROOVE, bd = 0, command=exp, fg="white", bg="#333333")
 e_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-sqrrootbtn = Button(row2, text="√x", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+sqrrootbtn = Button(row2, text="√x", font="segoe18", relief=GROOVE, command=sqr_root, bd = 0, fg="white", bg="#333333")
 sqrrootbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 sinhbtn = Button(row2, text="sinh", font="segoe18", relief=GROOVE, bd = 0, command=asin, fg="white", bg="#333333")
@@ -296,13 +363,13 @@ row3.pack(expand=True, fill=BOTH)
 conv_btn = Button(row3, text="Rad", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
 conv_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-round_btn = Button(row3, text="round", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+round_btn = Button(row3, text="round", font="segoe18", relief=GROOVE, bd = 0, command = round, fg="white", bg="#333333")
 round_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-ln_btn = Button(row3, text="ln", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+ln_btn = Button(row3, text="ln", font="segoe18", relief=GROOVE, bd = 0, command = ln, fg="white", bg="#333333")
 ln_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-log_btn = Button(row3, text="log", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+log_btn = Button(row3, text="log", font="segoe18", relief=GROOVE, bd = 0, command = log, fg="white", bg="#333333")
 log_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 powerbtn = Button(row3, text="x^y", font="segoe18", relief=GROOVE, bd = 0, command=pow, fg="white", bg="#333333")
@@ -326,7 +393,7 @@ mulBtn.pack(side=LEFT, expand=True, fill=BOTH)
 row4 = Frame(root, bg="#000000")
 row4.pack(expand=True, fill=BOTH)
 
-mod_btn = Button(row4, text="%", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+mod_btn = Button(row4, text="%", font="segoe18", relief=GROOVE, bd = 0, command = modulo, fg="white", bg="#333333")
 mod_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 openbkt_btn = Button(row4, text="(", font="segoe18", relief=GROOVE, bd = 0, command = insertOpenBkt, fg="white", bg="#333333")
@@ -341,7 +408,7 @@ dot_btn.pack(side=LEFT, expand=True, fill=BOTH)
 clearbtn = Button(row4, text="C", font="segoe18", relief=GROOVE, bd = 0, command = clear, fg="white", bg="#333333")
 clearbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-del_btn = Button(row4, text="⌫", font="segoe18", relief=GROOVE, bd = 0, fg="white", bg="#333333")
+del_btn = Button(row4, text="⌫", font="segoe18", relief=GROOVE, bd = 0, command = delete, fg="white", bg="#333333")
 del_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 btn0 = Button(row4, text="0", font="segoe18", relief=GROOVE, bd = 0, command=btn_0, fg="white", bg="#333333")
