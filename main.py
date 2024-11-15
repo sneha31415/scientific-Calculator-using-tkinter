@@ -9,7 +9,7 @@ root.geometry("650x400+300+300")
 root.title("Scientific Calculator")
 switch = None
 
-# function for inserting for 0 - 9
+# function for inserting 0 - 9
 def insert_value(value : str):
     if disp.get() == '0':
         disp.delete(0, END)
@@ -113,24 +113,24 @@ def exp():
     pos = len(disp.get())
     disp.insert(pos, str(math.e))
 
-def log():
+# log, ln, srqroot, fact
+def apply_math_func(func_name):
     try:
-        ans = float(disp.get())
-        ans = math.log10(ans)
+        if (func_name == "factorial"):
+            ans = (int)(disp.get())
+        else:
+            ans = (float)(disp.get())
+
+        func_name = getattr(math, func_name)
+        ans = func_name(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
+    except AttributeError:
+        tkinter.messagebox.showerror("Function Error!", f"Invalid function: {func_name}")
     except Exception as e:
         tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
-def ln():
-    try:
-        ans = float(disp.get())
-        ans = math.log(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception as e :
-        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
-        
+
 def roundNumber():
     try:
         ans = float(disp.get())
@@ -142,23 +142,7 @@ def roundNumber():
         tkinter.messagebox.showerror("Value Error!", "Please enter a valid number!")
     except Exception as e:  # Handle any other unforeseen errors
         tkinter.messagebox.showerror("Error!", f"An unexpected error occurred: {e}")
-def sqr_root():
-    try:
-        ans = float(disp.get())
-        ans = math.sqrt(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception as e:
-        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
-def fact():
-    try:
-        ans = disp.get()
-        ans = math.factorial(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception as e:
-        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
 def delete():
     pos = len(disp.get())
@@ -191,7 +175,7 @@ row1.pack(expand=True, fill=BOTH)
 pibtn = Button(row1, text="π", font="segoe18", relief=GROOVE, bd = 0, command=pi, fg="white", bg="#333333")
 pibtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-factbtn = Button(row1, text="x!", font="segoe18", relief=GROOVE, bd = 0, command = fact, fg="white", bg="#333333")
+factbtn = Button(row1, text="x!", font="segoe18", relief=GROOVE, bd = 0, command = lambda : apply_math_func("factorial"), fg="white", bg="#333333")
 factbtn.pack(side=LEFT, expand=True, fill=BOTH)
  
 sinbtn = Button(row1, text="sin", font="segoe18", relief=GROOVE, bd = 0, command = lambda: trigo("sin"), fg="white", bg="#333333")
@@ -222,7 +206,7 @@ row2.pack(expand=True, fill=BOTH)
 e_btn = Button(row2, text="e", font="segoe18", relief=GROOVE, bd = 0, command=exp, fg="white", bg="#333333")
 e_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-sqrrootbtn = Button(row2, text="√x", font="segoe18", relief=GROOVE, command=sqr_root, bd = 0, fg="white", bg="#333333")
+sqrrootbtn = Button(row2, text="√x", font="segoe18", relief=GROOVE, command=lambda: apply_math_func("sqrt"), bd = 0, fg="white", bg="#333333")
 sqrrootbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 sinhbtn = Button(row2, text="sinh", font="segoe18", relief=GROOVE, bd = 0, command=asin, fg="white", bg="#333333")
@@ -257,10 +241,10 @@ conv_btn.pack(side=LEFT, expand=True, fill=BOTH)
 round_btn = Button(row3, text="round", font="segoe18", relief=GROOVE, bd = 0, command = roundNumber, fg="white", bg="#333333")
 round_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-ln_btn = Button(row3, text="ln", font="segoe18", relief=GROOVE, bd = 0, command = ln, fg="white", bg="#333333")
+ln_btn = Button(row3, text="ln", font="segoe18", relief=GROOVE, bd = 0, command = lambda: apply_math_func("log"), fg="white", bg="#333333")
 ln_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-log_btn = Button(row3, text="log", font="segoe18", relief=GROOVE, bd = 0, command = log, fg="white", bg="#333333")
+log_btn = Button(row3, text="log", font="segoe18", relief=GROOVE, bd = 0, command = lambda:apply_math_func("log10"), fg="white", bg="#333333")
 log_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 powerbtn = Button(row3, text="x^y", font="segoe18", relief=GROOVE, bd = 0, command = lambda : insert_operator('**'), fg="white", bg="#333333")
