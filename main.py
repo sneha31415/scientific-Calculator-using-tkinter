@@ -17,7 +17,7 @@ def insert_value(value : str):
     disp.insert(pos, value)
 
 
-# funcs for operators { '+', '-', '*', '/', '.' , '**', '(' , ')' }
+# funcs for operators { '+', '-', '*', '/', '.' , '**', '(' , ')', '%' }
 def insert_operator(operator : str):
     pos = len(disp.get())
     disp.insert(pos, operator)
@@ -31,7 +31,7 @@ def conv():
         switch = False
         conv_btn.config(text='Rad')
 
-# trigo
+# trigo - sin , cos, tan
 def trigo(func_name):
     try:
         ans = float(disp.get())
@@ -52,7 +52,7 @@ def trigo(func_name):
 
 
 
-# inverse trigo
+# inverse trigo - sin^-1, cos^-1, tan^-1
 def asin():
     try:
         ans = float(disp.get())
@@ -99,9 +99,7 @@ def evaluate():
     except Exception as e:
         tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
-def modulo():
-    pos = len(disp.get())
-    disp.insert(pos, "%")
+
 
 def pi():
     if disp.get() == '0':
@@ -132,15 +130,18 @@ def ln():
         disp.insert(0, str(ans))
     except Exception as e :
         tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
-def round():
+        
+def roundNumber():
     try:
         ans = float(disp.get())
         ans = round(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
-    except Exception as e:
-        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
+    except ValueError as e:  # Catch specific ValueError for invalid inputs
+        tkinter.messagebox.showerror("Value Error!", "Please enter a valid number!")
+    except Exception as e:  # Handle any other unforeseen errors
+        tkinter.messagebox.showerror("Error!", f"An unexpected error occurred: {e}")
 def sqr_root():
     try:
         ans = float(disp.get())
@@ -253,7 +254,7 @@ row3.pack(expand=True, fill=BOTH)
 conv_btn = Button(row3, text="Rad", font="segoe18", relief=GROOVE, bd = 0, command = conv, fg="white", bg="#333333")
 conv_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-round_btn = Button(row3, text="round", font="segoe18", relief=GROOVE, bd = 0, command = round, fg="white", bg="#333333")
+round_btn = Button(row3, text="round", font="segoe18", relief=GROOVE, bd = 0, command = roundNumber, fg="white", bg="#333333")
 round_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 ln_btn = Button(row3, text="ln", font="segoe18", relief=GROOVE, bd = 0, command = ln, fg="white", bg="#333333")
@@ -283,7 +284,7 @@ mulBtn.pack(side=LEFT, expand=True, fill=BOTH)
 row4 = Frame(root, bg="#000000")
 row4.pack(expand=True, fill=BOTH)
 
-mod_btn = Button(row4, text="%", font="segoe18", relief=GROOVE, bd = 0, command = modulo, fg="white", bg="#333333")
+mod_btn = Button(row4, text="%", font="segoe18", relief=GROOVE, bd = 0, command = lambda: insert_operator('%'), fg="white", bg="#333333")
 mod_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 openbkt_btn = Button(row4, text="(", font="segoe18", relief=GROOVE, bd = 0, command = lambda : insert_operator('('), fg="white", bg="#333333")
