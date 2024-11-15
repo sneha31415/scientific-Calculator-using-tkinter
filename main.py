@@ -202,6 +202,24 @@ def evaluate():
 
 def clear():
     disp.delete(0, END)
+    disp.insert(0, 0)
+
+def modulo():
+    pos = len(disp.get())
+    disp.insert(pos, "%")
+
+def pi():
+    if disp.get() == '0':
+        disp.delete(0, END)
+    pos = len(disp.get())
+    disp.insert(pos, str(math.pi))
+
+def exp():
+    if disp.get() == '0':
+        disp.delete(0, END)
+    pos = len(disp.get())
+    disp.insert(pos, str(math.e))
+
 # Entry screen widget (for output)
 disp = Entry(root, font="Verdana 20", fg="Black", bg="mistyrose", bd=4, justify=RIGHT)
 disp.insert(0, '0')
