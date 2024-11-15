@@ -32,41 +32,25 @@ def conv():
         conv_btn.config(text='Rad')
 
 # trigo
-def sin():
+def trigo(func_name):
     try:
         ans = float(disp.get())
+        trig_function = getattr(math, func_name)
+        
         if switch is True:
-            ans = math.sin(math.radians(ans))
-        else :
-            ans = math.sin(ans)
+            ans = math.radians(ans)
+
+        ans = trig_function(ans)
+
         disp.delete(0, END)
         disp.insert(0, str(ans))
+
+    except AttributeError:
+        tkinter.messagebox.showerror("Function Error!", f"Invalid function: {func_name}")
     except Exception as e:
         tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
-def cos():
-    try:
-        ans = float(disp.get())
-        if switch is True:
-            ans = math.cos(math.radians(ans))
-        else :
-            ans = math.cos(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error!")
 
-def tan():
-    try:
-        ans = float(disp.get())
-        if switch is True:
-            ans = math.tan(math.radians(ans))
-        else :
-            ans = math.tan(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error!")
 
 # inverse trigo
 def asin():
@@ -209,13 +193,13 @@ pibtn.pack(side=LEFT, expand=True, fill=BOTH)
 factbtn = Button(row1, text="x!", font="segoe18", relief=GROOVE, bd = 0, command = fact, fg="white", bg="#333333")
 factbtn.pack(side=LEFT, expand=True, fill=BOTH)
  
-sinbtn = Button(row1, text="sin", font="segoe18", relief=GROOVE, bd = 0, command = sin, fg="white", bg="#333333")
+sinbtn = Button(row1, text="sin", font="segoe18", relief=GROOVE, bd = 0, command = lambda: trigo("sin"), fg="white", bg="#333333")
 sinbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-cosbtn = Button(row1, text="cos", font="segoe18", relief=GROOVE, bd = 0, command= cos, fg="white", bg="#333333")
+cosbtn = Button(row1, text="cos", font="segoe18", relief=GROOVE, bd = 0, command = lambda: trigo("cos"), fg="white", bg="#333333")
 cosbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-tanbtn = Button(row1, text="tan", font="segoe18", relief=GROOVE, bd = 0, command = tan, fg="white", bg="#333333")
+tanbtn = Button(row1, text="tan", font="segoe18", relief=GROOVE, bd = 0, command = lambda: trigo("tan"), fg="white", bg="#333333")
 tanbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 btn1 = Button(row1, text="1", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('1'), fg="white", bg="#333333")
