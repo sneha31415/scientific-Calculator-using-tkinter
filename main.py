@@ -100,18 +100,13 @@ def evaluate():
         tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
 
 
-
-def pi():
+# pi and e values
+def pi_or_e(symbol):
     if disp.get() == '0':
         disp.delete(0, END)
     pos = len(disp.get())
-    disp.insert(pos, str(math.pi))
+    disp.insert(pos, str(getattr(math, symbol)))
 
-def exp():
-    if disp.get() == '0':
-        disp.delete(0, END)
-    pos = len(disp.get())
-    disp.insert(pos, str(math.e))
 
 # log, ln, srqroot, fact
 def apply_math_func(func_name):
@@ -172,7 +167,7 @@ row1 = Frame(root, bg="#000000")
 row1.pack(expand=True, fill=BOTH)
 
 # Row 1 Buttons
-pibtn = Button(row1, text="π", font="segoe18", relief=GROOVE, bd = 0, command=pi, fg="white", bg="#333333")
+pibtn = Button(row1, text="π", font="segoe18", relief=GROOVE, bd = 0, command = lambda : pi_or_e("pi"), fg="white", bg="#333333")
 pibtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 factbtn = Button(row1, text="x!", font="segoe18", relief=GROOVE, bd = 0, command = lambda : apply_math_func("factorial"), fg="white", bg="#333333")
@@ -203,7 +198,7 @@ plusBtn.pack(side=LEFT, expand=True, fill=BOTH)
 row2 = Frame(root, bg="#000000")
 row2.pack(expand=True, fill=BOTH)
 
-e_btn = Button(row2, text="e", font="segoe18", relief=GROOVE, bd = 0, command=exp, fg="white", bg="#333333")
+e_btn = Button(row2, text="e", font="segoe18", relief=GROOVE, bd = 0, command = lambda : pi_or_e("e"), fg="white", bg="#333333")
 e_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 sqrrootbtn = Button(row2, text="√x", font="segoe18", relief=GROOVE, command=lambda: apply_math_func("sqrt"), bd = 0, fg="white", bg="#333333")
