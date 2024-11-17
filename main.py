@@ -8,7 +8,6 @@ root.geometry("650x400+300+300")
 root.title("Scientific Calculator")
 
 
-
 # Entry screen widget (for output)
 disp = Entry(root, font="Verdana 20", fg="white", bg="black", bd=10, justify=RIGHT)
 disp.insert(0, '0')
@@ -16,20 +15,20 @@ disp.pack(expand=True, fill=BOTH)
 
 
 # ---------Row 1 Buttons-----------
+row1_mapping = {
+    "π"     : math.pi,
+    "x!"    : "!", 
+    "sin"   : "sin",
+    "cos"   : "cos",
+    "tan"   : "tan",
+    "1"     : "1",
+    "2"     : "2",
+    "3"     : "3",
+    "+"     : "+"
+}
+
 row1 = Frame(root, bg="#000000")
 row1.pack(expand=True, fill=BOTH)
-
-row1_mapping = {
-    "π": math.pi,
-    "x!": "!", 
-    "sin": "sin",
-    "cos": "cos",
-    "tan": "tan",
-    "1": "1",
-    "2": "2",
-    "3": "3",
-    "+": "+"
-}
 
 for text, display in row1_mapping.items():
     Button(row1, text=text, font="segoe 14", relief=GROOVE, bd = 0, command = lambda display=display: insert_in_display(display, disp), fg="white", bg="#333333").pack(side=LEFT, expand=True, fill=BOTH)
@@ -37,20 +36,20 @@ for text, display in row1_mapping.items():
 
 
 # -----------Row 2 Buttons-----------
+row2_mapping = {
+    "e"     : math.e,
+    "√x"    : "sqrt", 
+    "sinh"  : "sinh",
+    "cosh"  : "cosh",
+    "tanh"  : "tanh",
+    "4"     : "4",
+    "5"     : "5",
+    "6"     : "6",
+    "-"     : "-"
+}
+
 row2 = Frame(root, bg="#000000")
 row2.pack(expand=True, fill=BOTH)
-
-row2_mapping = {
-    "e": math.e,
-    "√x": "sqrt", 
-    "sinh": "sinh",
-    "cosh": "cosh",
-    "tanh": "tanh",
-    "4": "4",
-    "5": "5",
-    "6": "6",
-    "-": "-"
-}
 
 for text, display in row2_mapping.items():
     Button(row2, text=text, font="segoe 14", relief=GROOVE, bd = 0, command = lambda display=display: insert_in_display(display, disp), fg="white", bg="#333333").pack(side=LEFT, expand=True, fill=BOTH)
@@ -61,15 +60,15 @@ row3 = Frame(root, bg="#000000")
 row3.pack(expand=True, fill=BOTH)
 
 row3_mapping = {
-    "rad": "rad",  
-    "1/x": "/",  
-    "ln": "ln",  
-    "log": "log",
-    "x^y": "**", 
-    "7": "7",
-    "8": "8",
-    "9": "9",
-    "x": "*"  
+    "rad"   : "rad",  
+    "1/x"   : "/",  
+    "ln"    : "ln",  
+    "log"   : "log",
+    "x^y"   : "**", 
+    "7"     : "7",
+    "8"     : "8",
+    "9"     : "9",
+    "x"     : "*"  
 }
 
 for text, display in row3_mapping.items():
@@ -80,16 +79,17 @@ for text, display in row3_mapping.items():
 
 # ----------row 4 buttons----------
 row4_mapping = {
-    "mod": "%",
-    "(": "(",
-    ")": ")",
-    ".": ".",
-    "C": "clear",
-    "⌫": "delete",
-    "0": "0",
-    "=": "evaluate",
-    "/": "/"
+    "mod"   : "%",
+    "("     : "(",
+    ")"     : ")",
+    "."     : ".",
+    "C"     : "clear",
+    "⌫"    : "delete",
+    "0"     : "0",
+    "="     : "evaluate",
+    "/"     : "/"
 }
+
 row4 = Frame(root, bg="#000000")
 row4.pack(expand=True, fill=BOTH)
 
