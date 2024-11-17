@@ -46,6 +46,7 @@ btn3.pack(side=LEFT, expand=True, fill=BOTH)
 plusBtn = Button(row1, text="+", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display('+', disp), fg="white", bg="#333333")
 plusBtn.pack(side=LEFT, expand=True, fill=BOTH)
 
+
 # Row 2 Buttons
 row2 = Frame(root, bg="#000000")
 row2.pack(expand=True, fill=BOTH)
