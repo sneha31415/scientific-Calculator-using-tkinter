@@ -12,12 +12,12 @@ def preprocess(expression):
 
 safe_env = {
     "__builtins__": None,  # Disable access to Python's built-in functions
-    "sin": math.sin,
-    "cos": math.cos,
-    "tan": math.tan,
-    "asin": math.asin,
-    "acos": math.acos,
-    "atan": math.atan,
+    "sin": lambda x: math.sin(math.radians(x)),  
+    "cos": lambda x: math.cos(math.radians(x)),  
+    "tan": lambda x: math.tan(math.radians(x)),  
+    "sinh": lambda x: math.degrees(math.asin(x)), 
+    "cosh": lambda x: math.degrees(math.acos(x)), 
+    "tanh": lambda x: math.degrees(math.atan(x)), 
     "sqrt": math.sqrt,
     "ln": math.log,      
     "log": math.log10,  
