@@ -52,7 +52,7 @@ row2 = Frame(root, bg="#000000")
 row2.pack(expand=True, fill=BOTH)
 
 for text, display in row2_mapping.items():
-    Button(row2, text=text, font="segoe 14", relief=GROOVE, bd = 0, command = lambda display=display: insert_in_display(display, disp), fg="white", bg="#333333").pack(side=LEFT, expand=True, fill=BOTH)
+    Button(row2, text=text, font="segoe 14", relief=GROOVE, bd = 0, command = lambda display=display: insert_in_display(display, disp), fg="white", bg="#333333").pack(side=LEFT, fill = BOTH, expand=True)
 
 
 #  -----------Row 3 Buttons-----------
@@ -61,7 +61,7 @@ row3.pack(expand=True, fill=BOTH)
 
 row3_mapping = {
     "rad"   : "rad",  
-    "1/x"   : "/",  
+    "1/x"   : "**-1",  
     "ln"    : "ln",  
     "log"   : "log",
     "x^y"   : "**", 
