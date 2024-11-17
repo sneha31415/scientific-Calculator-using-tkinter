@@ -1,164 +1,16 @@
 from tkinter import *
-import math
-import tkinter.messagebox
+from  functions import *
 
 root = Tk()
 
 # {geometry -> 650x400} {location on x, y -> 300+300}
 root.geometry("650x400+300+300")
 root.title("Scientific Calculator")
-switch = None
 
-# function for inserting 0 - 9
-def insert_value(value : str):
-    if disp.get() == '0':
-        disp.delete(0, END)
-    pos = len(disp.get())
-    disp.insert(pos, value)
-
-
-# funcs for operators { '+', '-', '*', '/', '.' , '**', '(' , ')', '%' }
-def insert_operator(operator : str):
-    pos = len(disp.get())
-    disp.insert(pos, operator)
-
-def conv():
-    global switch
-    if switch is None or not switch:
-        switch = True
-        conv_btn.config(text='Deg') 
-    else :
-        switch = False
-        conv_btn.config(text='Rad')
-
-# trigo - sin , cos, tan
-def trigo(func_name):
-    try:
-        ans = float(disp.get())
-        trig_function = getattr(math, func_name)
-        
-        if switch is True:
-            ans = math.radians(ans)
-
-        ans = trig_function(ans)
-
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-
-    except AttributeError:
-        tkinter.messagebox.showerror("Function Error!", f"Invalid function: {func_name}")
-    except Exception as e:
-        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
-
-
-
-# inverse trigo - sin^-1, cos^-1, tan^-1
-def asin():
-    try:
-        ans = float(disp.get())
-        if switch is True:
-            ans = math.asin(math.radians(ans))
-        else :
-            ans = math.asin(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error!")
-
-def acos():
-    try:
-        ans = float(disp.get())
-        if switch is True:
-            ans = math.acos(math.radians(ans))
-        else :
-            ans = math.acos(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error!")
-
-def atan():
-    try:
-        ans = float(disp.get())
-        if switch is True:
-            ans = math.atan(math.radians(ans))
-        else :
-            ans = math.atan(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error!")
-
-
-def evaluate():
-    try:
-        ans = disp.get()
-        ans = eval(ans)
-        disp.delete(0, END)
-        disp.insert(0, ans)
-    except Exception as e:
-        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
-
-
-# pi and e values
-def pi_or_e(symbol):
-    if disp.get() == '0':
-        disp.delete(0, END)
-    pos = len(disp.get())
-    disp.insert(pos, str(getattr(math, symbol)))
-
-
-# log, ln, srqroot, fact
-def apply_math_func(func_name):
-    try:
-        if (func_name == "factorial"):
-            ans = (int)(disp.get())
-        else:
-            ans = (float)(disp.get())
-
-        func_name = getattr(math, func_name)
-        ans = func_name(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except AttributeError:
-        tkinter.messagebox.showerror("Function Error!", f"Invalid function: {func_name}")
-    except Exception as e:
-        tkinter.messagebox.showerror("Value Error!", f"Invalid input: {e}")
-
-
-def roundNumber():
-    try:
-        ans = float(disp.get())
-        ans = round(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-
-    except ValueError as e:  # Catch specific ValueError for invalid inputs
-        tkinter.messagebox.showerror("Value Error!", "Please enter a valid number!")
-    except Exception as e:  # Handle any other unforeseen errors
-        tkinter.messagebox.showerror("Error!", f"An unexpected error occurred: {e}")
-
-
-def delete():
-    pos = len(disp.get())
-    display = str(disp.get())
-    if display == '' or display == ' ':
-        disp.insert(0, '0')
-    elif display == '0':
-        pass
-    else :
-        disp.delete(0, END)
-        disp.insert(0, display[0 : pos - 1])
-
-def clear():
-    disp.delete(0, END)
-    disp.insert(0, 0) 
-
-# ---------------------------------------------------
 
 
 # Entry screen widget (for output)
-disp = Entry(root, font="Verdana 20", fg="Black", bg="mistyrose", bd=4, justify=RIGHT)
+disp = Entry(root, font="Verdana 20", fg="white", bg="black", bd=10, justify=RIGHT)
 disp.insert(0, '0')
 disp.pack(expand=True, fill=BOTH)
 
@@ -167,62 +19,62 @@ row1 = Frame(root, bg="#000000")
 row1.pack(expand=True, fill=BOTH)
 
 # Row 1 Buttons
-pibtn = Button(row1, text="π", font="segoe18", relief=GROOVE, bd = 0, command = lambda : pi_or_e("pi"), fg="white", bg="#333333")
-pibtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-factbtn = Button(row1, text="x!", font="segoe18", relief=GROOVE, bd = 0, command = lambda : apply_math_func("factorial"), fg="white", bg="#333333")
+Button(row1, text="π", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display(math.pi, disp), fg="white", bg="#333333").pack(side=LEFT, expand=True, fill=BOTH)
+
+factbtn = Button(row1, text="x!", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display("!", disp), fg="white", bg="#333333")
 factbtn.pack(side=LEFT, expand=True, fill=BOTH)
  
-sinbtn = Button(row1, text="sin", font="segoe18", relief=GROOVE, bd = 0, command = lambda: trigo("sin"), fg="white", bg="#333333")
+sinbtn = Button(row1, text="sin", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display("sin", disp), fg="white", bg="#333333")
 sinbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-cosbtn = Button(row1, text="cos", font="segoe18", relief=GROOVE, bd = 0, command = lambda: trigo("cos"), fg="white", bg="#333333")
+cosbtn = Button(row1, text="cos", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display("cos", disp), fg="white", bg="#333333")
 cosbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-tanbtn = Button(row1, text="tan", font="segoe18", relief=GROOVE, bd = 0, command = lambda: trigo("tan"), fg="white", bg="#333333")
+tanbtn = Button(row1, text="tan", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display("tan", disp), fg="white", bg="#333333")
 tanbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn1 = Button(row1, text="1", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('1'), fg="white", bg="#333333")
+btn1 = Button(row1, text="1", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('1', disp), fg="white", bg="#333333")
 btn1.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn2 = Button(row1, text="2", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('2'), fg="white", bg="#333333")
+btn2 = Button(row1, text="2", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('2', disp), fg="white", bg="#333333")
 btn2.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn3 = Button(row1, text="3", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('3'), fg="white", bg="#333333")
+btn3 = Button(row1, text="3", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('3', disp), fg="white", bg="#333333")
 btn3.pack(side=LEFT, expand=True, fill=BOTH)
 
-plusBtn = Button(row1, text="+", font="segoe18", relief=GROOVE, bd = 0, command = lambda: insert_operator('+'), fg="white", bg="#333333")
+plusBtn = Button(row1, text="+", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display('+', disp), fg="white", bg="#333333")
 plusBtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 # Row 2 Buttons
 row2 = Frame(root, bg="#000000")
 row2.pack(expand=True, fill=BOTH)
 
-e_btn = Button(row2, text="e", font="segoe18", relief=GROOVE, bd = 0, command = lambda : pi_or_e("e"), fg="white", bg="#333333")
+e_btn = Button(row2, text="e", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display(math.e, disp), fg="white", bg="#333333")
 e_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-sqrrootbtn = Button(row2, text="√x", font="segoe18", relief=GROOVE, command=lambda: apply_math_func("sqrt"), bd = 0, fg="white", bg="#333333")
+sqrrootbtn = Button(row2, text="√x", font="segoe 14", relief=GROOVE, command=lambda: insert_in_display("sqrt", disp), bd = 0, fg="white", bg="#333333")
 sqrrootbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-sinhbtn = Button(row2, text="sinh", font="segoe18", relief=GROOVE, bd = 0, command=asin, fg="white", bg="#333333")
+sinhbtn = Button(row2, text="sinh", font="segoe 12", relief=GROOVE, bd = 0, command=lambda: insert_in_display("asin", disp), fg="white", bg="#333333")
 sinhbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-coshbtn = Button(row2, text="cosh", font="segoe18", relief=GROOVE, bd = 0, command = acos, fg="white", bg="#333333")
+coshbtn = Button(row2, text="cosh", font="segoe 12 bold", relief=GROOVE, bd = 0, command=lambda: insert_in_display("acos", disp), fg="white", bg="#333333")
 coshbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-tanhbtn = Button(row2, text="tanh", font="segoe18", relief=GROOVE, bd = 0, command = atan, fg="white", bg="#333333")
+tanhbtn = Button(row2, text="tanh", font="segoe 12", relief=GROOVE, bd = 0, command=lambda: insert_in_display("acos", disp), fg="white", bg="#333333")
 tanhbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn4 = Button(row2, text="4", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('4'), fg="white", bg="#333333")
+btn4 = Button(row2, text="4", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('4', disp), fg="white", bg="#333333")
 btn4.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn5 = Button(row2, text="5", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('5'), fg="white", bg="#333333")
+btn5 = Button(row2, text="5", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('5', disp), fg="white", bg="#333333")
 btn5.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn6 = Button(row2, text="6", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('6'), fg="white", bg="#333333")
+btn6 = Button(row2, text="6", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('6', disp), fg="white", bg="#333333")
 btn6.pack(side=LEFT, expand=True, fill=BOTH)
 
-minusBtn = Button(row2, text="-", font="segoe18", relief=GROOVE, bd = 0,command = lambda: insert_operator('-'),  fg="white", bg="#333333")
+minusBtn = Button(row2, text="-", font="segoe 14", relief=GROOVE, bd = 0,command = lambda: insert_in_display('-', disp),  fg="white", bg="#333333")
 minusBtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 
@@ -230,31 +82,32 @@ minusBtn.pack(side=LEFT, expand=True, fill=BOTH)
 row3 = Frame(root, bg="#000000")
 row3.pack(expand=True, fill=BOTH)
 
-conv_btn = Button(row3, text="Rad", font="segoe18", relief=GROOVE, bd = 0, command = conv, fg="white", bg="#333333")
+# currently not functional
+conv_btn = Button(row3, text="rad", font="segoe 11", relief=GROOVE, bd = 0,  fg="white", bg="#333333")
 conv_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-round_btn = Button(row3, text="round", font="segoe18", relief=GROOVE, bd = 0, command = roundNumber, fg="white", bg="#333333")
-round_btn.pack(side=LEFT, expand=True, fill=BOTH)
+inverse = Button(row3, text="1/x", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display("/", disp), fg="white", bg="#333333")
+inverse.pack(side=LEFT, expand=True, fill=BOTH)
 
-ln_btn = Button(row3, text="ln", font="segoe18", relief=GROOVE, bd = 0, command = lambda: apply_math_func("log"), fg="white", bg="#333333")
+ln_btn = Button(row3, text="ln", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display("ln", disp), fg="white", bg="#333333")
 ln_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-log_btn = Button(row3, text="log", font="segoe18", relief=GROOVE, bd = 0, command = lambda:apply_math_func("log10"), fg="white", bg="#333333")
+log_btn = Button(row3, text="log", font="segoe 14", relief=GROOVE, bd = 0, command = lambda:insert_in_display("log", disp), fg="white", bg="#333333")
 log_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-powerbtn = Button(row3, text="x^y", font="segoe18", relief=GROOVE, bd = 0, command = lambda : insert_operator('**'), fg="white", bg="#333333")
+powerbtn = Button(row3, text="x^y", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display('**', disp), fg="white", bg="#333333")
 powerbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn7 = Button(row3, text="7", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('7'), fg="white", bg="#333333")
+btn7 = Button(row3, text="7", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('7', disp), fg="white", bg="#333333")
 btn7.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn8 = Button(row3, text="8", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('8'), fg="white", bg="#333333")
+btn8 = Button(row3, text="8", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('8', disp), fg="white", bg="#333333")
 btn8.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn9 = Button(row3, text="9", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('9'), fg="white", bg="#333333")
+btn9 = Button(row3, text="9", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('9', disp), fg="white", bg="#333333")
 btn9.pack(side=LEFT, expand=True, fill=BOTH)
 
-mulBtn = Button(row3, text="x", font="segoe18", relief=GROOVE, bd = 0, command = lambda: insert_operator('*'), fg="white", bg="#333333")
+mulBtn = Button(row3, text="x", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display('*', disp), fg="white", bg="#333333")
 mulBtn.pack(side=LEFT, expand=True, fill=BOTH)
 
 
@@ -263,31 +116,31 @@ mulBtn.pack(side=LEFT, expand=True, fill=BOTH)
 row4 = Frame(root, bg="#000000")
 row4.pack(expand=True, fill=BOTH)
 
-mod_btn = Button(row4, text="%", font="segoe18", relief=GROOVE, bd = 0, command = lambda: insert_operator('%'), fg="white", bg="#333333")
+mod_btn = Button(row4, text="mod", font="segoe 12", relief=GROOVE, bd = 0, command = lambda: insert_in_display('%', disp), fg="white", bg="#333333")
 mod_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-openbkt_btn = Button(row4, text="(", font="segoe18", relief=GROOVE, bd = 0, command = lambda : insert_operator('('), fg="white", bg="#333333")
+openbkt_btn = Button(row4, text="(", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display('(', disp), fg="white", bg="#333333")
 openbkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-closebkt_btn = Button(row4, text=")", font="segoe18", relief=GROOVE, bd = 0, command = lambda : insert_operator(')'), fg="white", bg="#333333")
+closebkt_btn = Button(row4, text=")", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display(')', disp), fg="white", bg="#333333")
 closebkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-dot_btn = Button(row4, text=".", font="segoe18", relief=GROOVE, bd = 0, command = lambda : insert_operator('.'), fg="white", bg="#333333")
+dot_btn = Button(row4, text=".", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display('.', disp), fg="white", bg="#333333")
 dot_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-clearbtn = Button(row4, text="C", font="segoe18", relief=GROOVE, bd = 0, command = clear, fg="white", bg="#333333")
+clearbtn = Button(row4, text="C", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: clear(disp), fg="white", bg="#333333")
 clearbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-del_btn = Button(row4, text="⌫", font="segoe18", relief=GROOVE, bd = 0, command = delete, fg="white", bg="#333333")
+del_btn = Button(row4, text="⌫", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : delete(disp), fg="white", bg="#333333")
 del_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn0 = Button(row4, text="0", font="segoe18", relief=GROOVE, bd = 0, command= lambda: insert_value('0'), fg="white", bg="#333333")
+btn0 = Button(row4, text="0", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('0', disp), fg="white", bg="#333333")
 btn0.pack(side=LEFT, expand=True, fill=BOTH)
 
-equal_btn = Button(row4, text="=", font="segoe18", relief=GROOVE, bd = 0, command=evaluate, fg="white", bg="#333333")
+equal_btn = Button(row4, text="=", font="segoe 14",bg = "yellow", relief=GROOVE, bd = 0, command=lambda : evaluate(disp), fg="black")
 equal_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-divide_btn = Button(row4, text="÷", font="segoe18", relief=GROOVE, bd = 0, command = lambda: insert_operator('/'), fg="white", bg="#333333")
+divide_btn = Button(row4, text="÷", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display('/', disp), fg="white", bg="#333333")
 divide_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 
