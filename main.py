@@ -79,35 +79,66 @@ for text, display in row3_mapping.items():
 
 
 # ----------row 4 buttons----------
+row4_mapping = {
+    "mod": "%",
+    "(": "(",
+    ")": ")",
+    ".": ".",
+    "C": "clear",
+    "⌫": "delete",
+    "0": "0",
+    "=": "evaluate",
+    "/": "/"
+}
 row4 = Frame(root, bg="#000000")
 row4.pack(expand=True, fill=BOTH)
 
-mod_btn = Button(row4, text="mod", font="segoe 12", relief=GROOVE, bd = 0, command = lambda: insert_in_display('%', disp), fg="white", bg="#333333")
-mod_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-openbkt_btn = Button(row4, text="(", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display('(', disp), fg="white", bg="#333333")
-openbkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
+for text, display in row4_mapping.items():
+    bgColor = "#333333"
+    fontColor = "white"
+    
+    if text == "=":
+        bgColor = "yellow"
+        fontColor = "black"
+        command = lambda: evaluate(disp) 
+    elif text == "C":
+        command = lambda: clear(disp)  
+    elif text == "⌫":
+        command = lambda: delete(disp)  
+    else:
+        command = lambda display=display: insert_in_display(display, disp)  
+    
+    Button(row4, text=text, font="segoe 14", relief=GROOVE, bd=0,
+           command=command, fg=fontColor, bg=bgColor).pack(side=LEFT, expand=True, fill=BOTH)
 
-closebkt_btn = Button(row4, text=")", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display(')', disp), fg="white", bg="#333333")
-closebkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-dot_btn = Button(row4, text=".", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display('.', disp), fg="white", bg="#333333")
-dot_btn.pack(side=LEFT, expand=True, fill=BOTH)
+# mod_btn = Button(row4, text="mod", font="segoe 12", relief=GROOVE, bd = 0, command = lambda: insert_in_display('%', disp), fg="white", bg="#333333")
+# mod_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-clearbtn = Button(row4, text="C", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: clear(disp), fg="white", bg="#333333")
-clearbtn.pack(side=LEFT, expand=True, fill=BOTH)
+# openbkt_btn = Button(row4, text="(", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display('(', disp), fg="white", bg="#333333")
+# openbkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-del_btn = Button(row4, text="⌫", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : delete(disp), fg="white", bg="#333333")
-del_btn.pack(side=LEFT, expand=True, fill=BOTH)
+# closebkt_btn = Button(row4, text=")", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display(')', disp), fg="white", bg="#333333")
+# closebkt_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-btn0 = Button(row4, text="0", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('0', disp), fg="white", bg="#333333")
-btn0.pack(side=LEFT, expand=True, fill=BOTH)
+# dot_btn = Button(row4, text=".", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : insert_in_display('.', disp), fg="white", bg="#333333")
+# dot_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
-equal_btn = Button(row4, text="=", font="segoe 14",bg = "yellow", relief=GROOVE, bd = 0, command=lambda : evaluate(disp), fg="black")
-equal_btn.pack(side=LEFT, expand=True, fill=BOTH)
+# clearbtn = Button(row4, text="C", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: clear(disp), fg="white", bg="#333333")
+# clearbtn.pack(side=LEFT, expand=True, fill=BOTH)
 
-divide_btn = Button(row4, text="/", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display('/', disp), fg="white", bg="#333333")
-divide_btn.pack(side=LEFT, expand=True, fill=BOTH)
+# del_btn = Button(row4, text="⌫", font="segoe 14", relief=GROOVE, bd = 0, command = lambda : delete(disp), fg="white", bg="#333333")
+# del_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+# btn0 = Button(row4, text="0", font="segoe 14", relief=GROOVE, bd = 0, command= lambda: insert_in_display('0', disp), fg="white", bg="#333333")
+# btn0.pack(side=LEFT, expand=True, fill=BOTH)
+
+# equal_btn = Button(row4, text="=", font="segoe 14",bg = "yellow", relief=GROOVE, bd = 0, command=lambda : evaluate(disp), fg="black")
+# equal_btn.pack(side=LEFT, expand=True, fill=BOTH)
+
+# divide_btn = Button(row4, text="/", font="segoe 14", relief=GROOVE, bd = 0, command = lambda: insert_in_display('/', disp), fg="white", bg="#333333")
+# divide_btn.pack(side=LEFT, expand=True, fill=BOTH)
 
 
 
