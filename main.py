@@ -60,7 +60,7 @@ row3 = Frame(root, bg="#000000")
 row3.pack(expand=True, fill=BOTH)
 
 row3_mapping = {
-    "rad"   : "rad",  
+    "deg"   : "",  
     "1/x"   : "**-1",  
     "ln"    : "ln",  
     "log"   : "log",

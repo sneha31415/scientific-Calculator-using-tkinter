@@ -5,9 +5,8 @@ import math, re
 
 def preprocess(expression):
     #  to replace 'n!' with 'factorial(n)'
-    expression = re.sub(r'(\(.*\))!', r'factorial(round(\1))', expression)
+    expression = re.sub(r'(\(.*?\))!', r'factorial\1', expression)
     expression = re.sub(r'(\d+)!', r'factorial(\1)', expression)
-
     return expression
 
 safe_env = {
